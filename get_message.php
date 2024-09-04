@@ -1,17 +1,6 @@
 <?php
-// Database connection details
-$host = 'localhost';
-$db = 'api_demo';
-$user = 'root';
-$password = '';
+require_once('db/connection.php');
 
-// Create connection
-$conn = new mysqli($host, $user, $password, $db);
-
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
 
 // Check if request method is POST
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {

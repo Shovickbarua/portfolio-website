@@ -1,17 +1,5 @@
 <?php
-// Database connection details
-$host = 'localhost';      // Database host
-$db = 'api_demo';         // Database name
-$user = 'root';           // Database username
-$password = '';           // Database password
-
-// Create connection
-$conn = new mysqli($host, $user, $password, $db);
-
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
+require_once('db/connection.php');
 
 // SQL to create table
 $tableName = 'users';
