@@ -2,7 +2,7 @@
 
 // Database connection details
 $host = 'localhost';
-$db = 'api_demo';
+$db = 'message';
 $user = 'root';
 $password = '';
 
