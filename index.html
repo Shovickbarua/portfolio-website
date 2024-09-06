@@ -127,7 +127,7 @@
 
         <ul class="social-list">
 
-          <li class="social-item">
+          <!-- <li class="social-item">
             <a href="#" class="social-link">
               <ion-icon name="logo-facebook"></ion-icon>
             </a>
@@ -143,11 +143,17 @@
             <a href="#" class="social-link">
               <ion-icon name="logo-instagram"></ion-icon>
             </a>
+          </li> -->
+          
+          <li class="social-item">
+            <a href="https://github.com/Shovickbarua" class="social-link">
+              <ion-icon name="logo-github"></ion-icon>
+            </a>
           </li>
           
           <li class="social-item">
-            <a href="#" class="social-link">
-              <ion-icon name="logo-github"></ion-icon>
+            <a href="https://www.linkedin.com/in/shovick-barua/" class="social-link">
+              <ion-icon name="logo-linkedin"></ion-icon>
             </a>
           </li>
 
@@ -219,7 +225,7 @@
           </p>
 
           <p>
-            My skills extend to front-end technologies like HTML, CSS, Bootstrap, and Tailwind CSS, and I have working knowledge of React Native, Vue, PHP, Python, Django, FastAPI, and Rust, enabling me to adapt to various project needs. I also have a strong eye for design with experience in Figma and Adobe Illustrator.
+            My skills extend to front-end technologies like HTML, CSS, Bootstrap, and Tailwind CSS, and I have working knowledge of React Native, Vue, Python, Django, FastAPI, and Rust, enabling me to adapt to various project needs. I also have a strong eye for design with experience in Figma and Adobe Illustrator.
           </p>
 
           <p>
@@ -313,7 +319,7 @@
           - testimonials
         -->
 
-        <!-- <section class="testimonials">
+        <section class="testimonials">
 
           <h3 class="h3 testimonials-title">Testimonials</h3>
 
@@ -330,7 +336,7 @@
 
                 <div class="testimonials-text" data-testimonials-text>
                   <p>
-                    Richard was hired to create a corporate identity. We were very pleased with the work done. She has a
+                    Shovick was hired to create a corporate identity. We were very pleased with the work done. She has a
                     lot of experience
                     and is very concerned about the needs of client. Lorem ipsum dolor sit amet, ullamcous cididt
                     consectetur adipiscing
@@ -352,7 +358,7 @@
 
                 <div class="testimonials-text" data-testimonials-text>
                   <p>
-                    Richard was hired to create a corporate identity. We were very pleased with the work done. She has a
+                    Shovick was hired to create a corporate identity. We were very pleased with the work done. She has a
                     lot of experience
                     and is very concerned about the needs of client. Lorem ipsum dolor sit amet, ullamcous cididt
                     consectetur adipiscing
@@ -374,7 +380,7 @@
 
                 <div class="testimonials-text" data-testimonials-text>
                   <p>
-                    Richard was hired to create a corporate identity. We were very pleased with the work done. She has a
+                    Shovick was hired to create a corporate identity. We were very pleased with the work done. She has a
                     lot of experience
                     and is very concerned about the needs of client. Lorem ipsum dolor sit amet, ullamcous cididt
                     consectetur adipiscing
@@ -396,7 +402,7 @@
 
                 <div class="testimonials-text" data-testimonials-text>
                   <p>
-                    Richard was hired to create a corporate identity. We were very pleased with the work done. She has a
+                    Shovick was hired to create a corporate identity. We were very pleased with the work done. She has a
                     lot of experience
                     and is very concerned about the needs of client. Lorem ipsum dolor sit amet, ullamcous cididt
                     consectetur adipiscing
@@ -409,7 +415,7 @@
 
           </ul>
 
-        </section> -->
+        </section> 
 
 
         <!--
@@ -442,7 +448,7 @@
 
               <div data-modal-text>
                 <p>
-                  Richard was hired to create a corporate identity. We were very pleased with the work done. She has a
+                  Shovick was hired to create a corporate identity. We were very pleased with the work done. She has a
                   lot of experience
                   and is very concerned about the needs of client. Lorem ipsum dolor sit amet, ullamcous cididt
                   consectetur adipiscing
@@ -461,7 +467,7 @@
           - clients
         -->
 
-        <section class="clients">
+        <!-- <section class="clients">
 
           <h3 class="h3 clients-title">Clients</h3>
 
@@ -505,7 +511,7 @@
 
           </ul>
 
-        </section>
+        </section> -->
 
       </article>
 
@@ -1252,15 +1258,15 @@
 
           <h3 class="h3 form-title">Contact Form</h3>
 
-          <form action="#" class="form" data-form>
+          <form id="myForm" class="form" method="POST" data-form>
 
             <div class="input-wrapper">
-              <input type="text" name="fullname" class="form-input" placeholder="Full name" required data-form-input>
+              <input type="text" name="name" id="name" class="form-input" placeholder="Full name" required data-form-input>
 
-              <input type="email" name="email" class="form-input" placeholder="Email address" required data-form-input>
+              <input type="email" name="email" id="email" class="form-input" placeholder="Email address" required data-form-input>
             </div>
 
-            <textarea name="message" class="form-input" placeholder="Your Message" required data-form-input></textarea>
+            <textarea name="message" class="form-input" id="message" placeholder="Your Message" required data-form-input></textarea>
 
             <button class="form-btn" type="submit" disabled data-form-btn>
               <ion-icon name="paper-plane"></ion-icon>
@@ -1268,6 +1274,8 @@
             </button>
 
           </form>
+
+          <div id="responseMessage"></div>
 
         </section>
 
@@ -1292,6 +1300,42 @@
   -->
   <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
   <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
+  <script>
+    document.getElementById('myForm').addEventListener('submit', function(e) {
+        e.preventDefault(); // Prevent form submission
+    
+        // Collect form data
+        const formData = new FormData(this);
+    
+        // Convert form data to a JSON object
+        // const data = Object.fromEntries(formData.entries());
+    
+        // API URL
+        // const apiUrl = 'https://your-api-endpoint.com/submit';
+    
+        // Send the POST request using fetch
+        fetch('users/posts/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json', // Sending JSON data
+            },
+            // body: JSON.stringify(data),
+            body: formData,
+        })
+        .then(response => response.json())
+        .then(data => {
+            // Handle the response
+            document.getElementById('responseMessage').textContent = 'Success: ' + JSON.stringify(data);
+        })
+        .catch(error => {
+            // Handle errors
+            console.error('Error:', error);
+            document.getElementById('responseMessage').textContent = 'Error: ' + error.message;
+        });
+    });
+    </script>
+    
 
 </body>
 
