@@ -3,11 +3,21 @@ from pydantic import BaseModel
 from typing import Union, Annotated
 from backend import model
 from backend.database import SessionLocal, engine
+from fastapi.middleware.cors import CORSMiddleware
 
 from sqlalchemy.orm import Session
 
 app = FastAPI()
 model.Base.metadata.create_all(bind=engine)
+
+# CORS configuration
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://127.0.0.1:5500"],  # Adjust this list with your frontend URL
+    allow_credentials=True,
+    allow_methods=["*"],  # Allow all HTTP methods
+    allow_headers=["*"],  # Allow all headers
+)
 
 
 class UserBase(BaseModel):
