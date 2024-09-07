@@ -1,8 +1,9 @@
 from fastapi import FastAPI, Depends, HTTPException
 from pydantic import BaseModel
 from typing import Union, Annotated
-from . import model
-from .database import SessionLocal, engine
+from backend import model
+from backend.database import SessionLocal, engine
+
 from sqlalchemy.orm import Session
 
 app = FastAPI()
@@ -24,10 +25,11 @@ def get_db():
 
 db_dependency = Annotated[Session, Depends(get_db)]
 
-@app.get("/users")
+@app.get("/")
 async def get_users(db: db_dependency):
-    users = db.query(model.User).all()
-    return users
+    # users = db.query(model.User).all()
+    # return users
+    return {"message": "Hello World"}
 
 @app.post("/users")
 async def post_users(user: UserBase, db: db_dependency):
