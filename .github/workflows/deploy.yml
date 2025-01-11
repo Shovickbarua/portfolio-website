@@ -21,6 +21,6 @@ jobs:
           lftp -u ${{ secrets.FTP_USERNAME }},${{ secrets.FTP_PASSWORD }} ${{ secrets.FTP_HOST }} <<EOF
           set ftp:ssl-allow no
           set sftp:port ${{ secrets.FTP_PORT }}
-          mirror -R ./ /path/to/server/directory/
+          mirror -R ./ /var/www/portfolio-website/
           bye
           EOF
