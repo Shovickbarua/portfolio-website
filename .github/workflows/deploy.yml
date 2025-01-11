@@ -1,0 +1,26 @@
+name: Deploy to InterServer
+
+on:
+  push:
+    branches:
+      - main  # Replace 'main' with your branch name if different
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Install LFTP
+        run: sudo apt-get install lftp
+
+      - name: Deploy files
+        run: |
+          lftp -u ${{ secrets.FTP_USERNAME }},${{ secrets.FTP_PASSWORD }} ${{ secrets.FTP_HOST }} <<EOF
+          set ftp:ssl-allow no
+          set sftp:port ${{ secrets.FTP_PORT }}
+          mirror -R ./ /path/to/server/directory/
+          bye
+          EOF
