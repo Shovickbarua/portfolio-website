@@ -4,17 +4,15 @@ from fastapi.middleware.cors import CORSMiddleware
 from sqlmodel import Field, Session, SQLModel, create_engine, select
 from typing import Annotated
 
-class Hero(SQLModel, table=True):
+class Contact(SQLModel, table=True):
     id: int | None = Field(default=None, primary_key=True)
-    name: str = Field(index=True)
-    age: int | None = Field(default=None, index=True)
-    secret_name: str
+    name: str = Field(max_length=100)
+    email: str = Field(max_length=100)
+    message: str = Field(max_length=500)
 
-sqlite_file_name = "database.db"
-sqlite_url = f"sqlite:///{sqlite_file_name}"
+url = "mysql+pymysql://root:shovickbarua92@localhost/contact"
 
-connect_args = {"check_same_thread": False}
-engine = create_engine(sqlite_url, connect_args=connect_args)
+engine = create_engine(url)
 
 
 def create_db_and_tables():
@@ -33,6 +31,7 @@ app = FastAPI()
 origins = [
     "https://shovickbarua.info",
     "http://localhost:8080",
+    "http://127.0.0.1:5500",
 ]
 
 app.add_middleware(
@@ -43,23 +42,19 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-class Contact(BaseModel):
-    name : str
-    email : str
-    message : str
 
 @app.on_event("startup")
 def on_startup():
     create_db_and_tables()
 
-@app.post("/contact")
-async def contact(contact: Contact):
+@app.get("/")
+async def root():
     return {"message": "Hello World"}
 
-@app.post("/heroes/")
-def create_hero(hero: Hero, session: SessionDep) -> Hero:
-    session.add(hero)
+@app.post("/contact")
+async def contact(contact: Contact, session: SessionDep):
+    session.add(contact)
     session.commit()
-    session.refresh(hero)
-    return hero
+    session.refresh(contact)
+    return contact
 
